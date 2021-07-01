@@ -15,7 +15,7 @@ spec:
             - name : apiconversao
               image: dbatista89/daniel-api-conversao:v1
               ports:
-                - containerPort: 8080
+                - containerPort: 80
 
 --- 
 
@@ -26,10 +26,8 @@ metadata:
 spec:
   selector:
     app: apiconversao
-    run: apiconversao
   ports:
    - port: 80
      targetPort: 8080
-     protocol: TCP
      nodePort: 30000
   type: NodePort
