@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apiconversao
+spec:
+  selector:
+      matchLabels: 
+          app: apiconversao
+  template:
+        metadata:
+          labels: 
+            app: apiconversao
+        spec: 
+          containers:
+            - name : apiconversao
+              image: dbatista89/daniel-api-conversao:v1
+              ports:
+                - containerPort: 8080
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiconversao-service
+spec:
+  selector:
+    app: apiconversao
+    run: apiconversao
+  ports:
+   - port: 80
+     targetPort: 8080
+     protocol: TCP
+     nodePort: 30000
+  type: NodePort
